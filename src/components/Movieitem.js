@@ -18,7 +18,9 @@ const MovieItem = (props)=>
         e.preventDefault();
 
         axios.delete('http://localhost:4000/api/movie/'+props.myMovies._id)
-        .then()
+        .then((res)=>{
+            props.Reload();
+        })
         .catch();
       }
     
@@ -37,7 +39,8 @@ const MovieItem = (props)=>
             </Card.Body>
             {/*This code snippet adds an "Edit" button to each movie item, allowing users to navigate to the edit page for that specific movie. */}
             <Link to={"/edit/" + props.myMovies._id} className="btn btn-primary">Edit</Link>
-            <Button variant="danger" onClick={handleDelete}>Delete</Button>
+            {/* Adds a delete button to each movie, sending a DELETE request with the movie's ID to the server. */}
+            <Button variant="danger" onClick={handleDelete}>Delete</Button> 
             </Card>
         </div>
     );
