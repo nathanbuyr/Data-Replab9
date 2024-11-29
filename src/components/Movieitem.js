@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+
 {/* MovieItem Function*/ }
 {/* Using seprated components,it separates concerns and makes the app modular*/ }
 {/* Props are read only,clear and reusable*/ }
@@ -10,6 +13,14 @@ const MovieItem = (props)=>
     useEffect(() => {
         console.log("Movie Item:", props.Mymovies);
       }, [props.mymovie]); // Only run this effect when the Mymovies prop changes
+
+      const handleDelete = (e)=>{
+        e.preventDefault();
+
+        axios.delete('http://localhost:4000/api/movie/'+props.myMovies._id)
+        .then()
+        .catch();
+      }
     
     return(
         <div>
@@ -26,6 +37,7 @@ const MovieItem = (props)=>
             </Card.Body>
             {/*This code snippet adds an "Edit" button to each movie item, allowing users to navigate to the edit page for that specific movie. */}
             <Link to={"/edit/" + props.myMovies._id} className="btn btn-primary">Edit</Link>
+            <Button variant="danger" onClick={handleDelete}>Delete</Button>
             </Card>
         </div>
     );
